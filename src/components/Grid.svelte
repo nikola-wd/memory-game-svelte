@@ -33,13 +33,15 @@
     }
   }
 
+  $: twoMatched = (
+    peekTwo.length === 2 
+    && 
+    cells.find(c => c.key === peekTwo[0]).val === cells.find(c => c.key === peekTwo[1]).val
+  )
+
 
   afterUpdate(() => {
-		if (
-      peekTwo.length === 2 
-      && 
-      cells.find(c => c.key === peekTwo[0]).val === cells.find(c => c.key === peekTwo[1]).val
-    ) {
+		if (twoMatched) {
       cells = markSolved(cells, peekTwo)
       peekTwo = []
     }
