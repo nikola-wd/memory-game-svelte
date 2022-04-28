@@ -1,4 +1,4 @@
-<div class="grid" style="--size: {size}">
+<div class="grid" style="--size: {size}; --cell-size: {cellSize}; --padd: {gap}">
   {#each cells as cell, index (cell.key)}
     <Cell 
       peekTwo="{peekTwo}" 
@@ -9,19 +9,21 @@
 </div>
 
 <div>{JSON.stringify(peekTwo)}</div>
-<!-- <div>{JSON.stringify(cells, null, 2)}</div> -->
+<div>{JSON.stringify(cells, null, 2)}</div>
 
 
 <script>
   import { afterUpdate } from 'svelte';
   import Cell from './Cell.svelte'
 
-  import {cellsTemplate, makeRepeatedArr, shuffleArray, markSolved} from '../utils/utils'
+  import {makeRepeatedArr, shuffleArray, markSolved} from '../utils/utils'
 
   // State
+  const cellSize = '60px'
+  const gap = '10px'
   let size = 4
   let peekTwo = []
-  let cells = shuffleArray(makeRepeatedArr(cellsTemplate.slice(0, size * 2), 2))
+  let cells = shuffleArray(makeRepeatedArr(size))
 
   const handleClick = (key) => {
     if (peekTwo.includes(key)) return
@@ -53,21 +55,18 @@
 
 <style scoped>
 .grid {
-  --padd: 10px;
-  --cell-size: 60px;
-  --grid-size: calc(var(--cell-size) * var(--size));
+  --grid-size: calc(var(--cell-size) * var(--size) + var(--padd) * (var(--size)));
   background: #f6fafd;
   margin-top: 1rem;
   border-radius: 5px;
   margin-left: auto;
   margin-right: auto;
-  padding: var(--padd);
+  padding: calc(var(--padd) * 0.5);
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: space-between;
   width: var(--grid-size);
   user-select: none;
-  margin-bottom: calc(-1 * var(--padd))
 }
 </style>

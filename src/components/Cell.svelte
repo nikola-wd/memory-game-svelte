@@ -5,6 +5,7 @@
     {cell.solved ? 'solved' : ''}
   "
   data-cell-val="{cell.val}" 
+  style="--img: {cell.img}"
   on:click="{() => onHandleClick(cell.key)}"
 />
 
@@ -17,12 +18,11 @@
 
 <style scoped>
 .cell {
-  --cell-size: calc((var(--grid-size) - var(--padd) * (var(--size) - 1) ) / var(--size));
   position: relative;
   width: var(--cell-size);
   height: var(--cell-size);
   border-radius: 3px;
-  margin-bottom: var(--padd);
+  margin: calc(var(--padd) * 0.5);
   transform-style: preserve-3d;
   transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
@@ -45,7 +45,8 @@
   justify-content: center;
   align-items: center;
   font-weight: 700;
-  background: teal;
+  /* background-image: var(--img); */
+  background-image: var(--img);
   color: #fff;
   transition: all .3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }

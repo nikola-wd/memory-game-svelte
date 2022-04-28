@@ -1,12 +1,33 @@
-const cellsTemplate = [
-  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
-  23, 34, 25, 26, 27, 28, 29, 30,
-];
+const makeRepeatedArr = (size) => {
+  const length = size * size;
 
-const makeRepeatedArr = (arr, n) =>
-  Array.from({ length: n }, () => arr)
-    .flat()
-    .map((item, index) => ({ key: index, val: item, solved: false }));
+  return [...Array(length).keys()].map((_, key) => {
+    const val =
+      key === length * 0.5
+        ? length * 0.5 - 1
+        : key > length * 0.5
+        ? length - key - 1
+        : key;
+
+    console.log(`${key} - ${val}`);
+
+    let img;
+    fetch(`https://source.unsplash.com/300x${300 + (200 + 50)}?animals`)
+      .then((res) => {
+        console.log(res.url);
+      })
+      .catch((err) => console.log(err));
+
+    return {
+      key,
+      val,
+      img: `linear-gradient(45deg, hsl(${
+        10 * (val + 3)
+      }, 100%, 50%) 50%, black 51%)`,
+      solved: false,
+    };
+  });
+};
 
 const shuffleArray = (arr) => {
   const updatedArr = [...arr];
@@ -31,4 +52,4 @@ const markSolved = (arr, peekArr) => {
   return updatedArr;
 };
 
-export { cellsTemplate, makeRepeatedArr, shuffleArray, markSolved };
+export { makeRepeatedArr, shuffleArray, markSolved };
