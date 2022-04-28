@@ -1,5 +1,20 @@
+<div class="grid" style="--size: {size}">
+  {#each cells as cell, index (cell.key)}
+    <Cell 
+      peekTwo="{peekTwo}" 
+      cell="{cell}" 
+      onHandleClick="{handleClick}" 
+    />
+	{/each}
+</div>
+
+<div>{JSON.stringify(peekTwo)}</div>
+<div>{JSON.stringify(cells, null, 2)}</div>
+
+
 <script>
   import { afterUpdate } from 'svelte';
+  import Cell from './Cell.svelte'
 
   let size = 4
   const cellsTemplate = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
@@ -35,22 +50,7 @@
 
 </script>
 
-<div class="grid" style="--size: {size}">
-  {#each cells as cell, index (cell.key)}
-    <div 
-      class="
-        cell 
-        {peekTwo.includes(cell.key) ? 'peek' : ''}
-        {cell.solved ? 'solved' : ''}
-      "
-      data-cell-val="{cell.val}" 
-      on:click="{() => handleClick(cell.key)}"
-    />
-	{/each}
-</div>
 
-<div>{JSON.stringify(peekTwo)}</div>
-<div>{JSON.stringify(cells, null, 2)}</div>
 
 <style scoped>
 .grid {
@@ -66,55 +66,9 @@
   flex-wrap: wrap;
   justify-content: space-between;
   align-items: space-between;
-  /* align-content: flex-start; */
   width: var(--grid-size);
   height: var(--grid-size);
   user-select: none;
-}
-.cell {
-  --cell-size: calc((var(--grid-size) - var(--padd) * (var(--size) - 1) ) / var(--size));
-  position: relative;
-  width: var(--cell-size);
-  height: var(--cell-size);
-  border-radius: 3px;
-  transform-style: preserve-3d;
-  transition: all 1.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-}
-
-.cell:after,
-.cell:before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 3px;
-}
-
-.cell:before {
-  content: attr(data-cell-val);
-  transform: rotateY(180deg);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: 700;
-  background: teal;
-  color: #fff;
-}
-.cell:after {
-  backface-visibility: hidden;
-  background: #cecece;
-  z-index: 1;
-}
-
-/* .cell:hover, */
-.cell.peek,
-.cell.solved {
-  transform: rotateY(180deg);
-}
-
-.cell.solved:before {
-  background: lightblue;
+  padding-bottom: 0;
 }
 </style>
