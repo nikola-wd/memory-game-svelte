@@ -1,11 +1,13 @@
 <script>
-  import logo from './assets/svelte.png'
   import Counter from './lib/Counter.svelte'
+    import Grid from './components/Grid.svelte'
 </script>
 
 <main>
   <h1>Svelte Memory Game</h1>
   <Counter />
+
+  <Grid />
 </main>
 
 <style>
@@ -28,7 +30,7 @@
   h1 {
     color: #ff3e00;
     text-transform: uppercase;
-    font-size: 4rem;
+    font-size: 2rem;
     font-weight: 100;
     line-height: 1.1;
     margin: 2rem auto;
