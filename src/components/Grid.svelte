@@ -9,7 +9,7 @@
 </div>
 
 <div>{JSON.stringify(peekTwo)}</div>
-<div>{JSON.stringify(cells, null, 2)}</div>
+<!-- <div>{JSON.stringify(cells, null, 2)}</div> -->
 
 
 <script>
@@ -54,7 +54,8 @@
 <style scoped>
 .grid {
   --padd: 10px;
-  --grid-size: 300px;
+  --cell-size: 60px;
+  --grid-size: calc(var(--cell-size) * var(--size));
   background: #f6fafd;
   margin-top: 1rem;
   border-radius: 5px;
@@ -66,8 +67,7 @@
   justify-content: space-between;
   align-items: space-between;
   width: var(--grid-size);
-  height: var(--grid-size);
   user-select: none;
-  padding-bottom: 0;
+  margin-bottom: calc(-1 * var(--padd))
 }
 </style>

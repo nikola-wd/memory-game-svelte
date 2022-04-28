@@ -22,6 +22,7 @@
   width: var(--cell-size);
   height: var(--cell-size);
   border-radius: 3px;
+  margin-bottom: var(--padd);
   transform-style: preserve-3d;
   transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
