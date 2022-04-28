@@ -16,7 +16,7 @@
   import { afterUpdate } from 'svelte';
   import Cell from './Cell.svelte'
 
-  import {cellsTemplate, makeRepeatedArr, shuffleArray} from '../utils/utils'
+  import {cellsTemplate, makeRepeatedArr, shuffleArray, markSolved} from '../utils/utils'
 
   // State
   let size = 4
@@ -35,27 +35,12 @@
 
 
   afterUpdate(() => {
-    console.log(111)
-
 		if (
       peekTwo.length === 2 
       && 
-      cells[peekTwo[0]].val === cells[peekTwo[1]].val
+      cells.find(c => c.key === peekTwo[0]).val === cells.find(c => c.key === peekTwo[1]).val
     ) {
-      let updatedCells = [...cells]
-      console.log(updatedCells)
-      updatedCells = updatedCells.map(cell => {
-        console.log(cell)
-        if (
-          cell.key === peekTwo[0]
-          ||
-          cell.key === peekTwo[1]
-        ) {
-          console.log('Yooo')
-          cell.solved = true
-        }
-      })
-      cells = updatedCells
+      cells = markSolved(cells, peekTwo)
       peekTwo = []
     }
 	});

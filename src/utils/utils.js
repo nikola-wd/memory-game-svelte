@@ -8,14 +8,26 @@ const makeRepeatedArr = (arr, n) =>
     .map((item, index) => ({ key: index, val: item, solved: false }));
 
 const shuffleArray = (arr) => {
-  const newArr = [...arr];
-  for (let i = newArr.length - 1; i > 0; i--) {
+  const updatedArr = [...arr];
+  for (let i = updatedArr.length - 1; i > 0; i--) {
     let j = Math.floor(Math.random() * (i + 1));
-    let temp = newArr[i];
-    newArr[i] = newArr[j];
-    newArr[j] = temp;
+    let temp = updatedArr[i];
+    updatedArr[i] = updatedArr[j];
+    updatedArr[j] = temp;
   }
-  return newArr;
+  return updatedArr;
 };
 
-export { cellsTemplate, makeRepeatedArr, shuffleArray };
+const markSolved = (arr, peekArr) => {
+  let updatedArr = [...arr];
+  updatedArr = updatedArr.map((cell) => {
+    if (cell.key === peekArr[0] || cell.key === peekArr[1]) {
+      cell.solved = true;
+    }
+
+    return cell;
+  });
+  return updatedArr;
+};
+
+export { cellsTemplate, makeRepeatedArr, shuffleArray, markSolved };
