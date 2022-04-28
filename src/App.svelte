@@ -1,11 +1,9 @@
 <script>
-  import Counter from './lib/Counter.svelte'
-    import Grid from './components/Grid.svelte'
+  import Grid from './components/Grid.svelte'
 </script>
 
 <main>
   <h1>Svelte Memory Game</h1>
-  <Counter />
 
   <Grid />
 </main>
