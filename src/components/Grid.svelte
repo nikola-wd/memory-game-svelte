@@ -16,16 +16,16 @@
   import { afterUpdate } from 'svelte';
   import Cell from './Cell.svelte'
 
+  import {cellsTemplate, makeRepeatedArr, shuffleArray} from '../utils/utils'
+
+  // State
   let size = 4
-  const cellsTemplate = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
-
   let peekTwo = []
-
-  const makeRepeatedArr = (arr, n) => Array.from({length: n}, () => arr).flat().map((item, index) => ({key: index, val: item, solved: false}))
-
-  let cells = makeRepeatedArr(cellsTemplate.slice(0, size * 2), 2)
+  let cells = shuffleArray(makeRepeatedArr(cellsTemplate.slice(0, size * 2), 2))
 
   const handleClick = (key) => {
+    if (peekTwo.includes(key)) return
+
     if (peekTwo.length === 2) {
       peekTwo = [key]
     } else {
@@ -35,14 +35,26 @@
 
 
   afterUpdate(() => {
+    console.log(111)
+
 		if (
-        peekTwo.length === 2 
-        && 
-        cells[peekTwo[0]].val === cells[peekTwo[1]].val
-      ) {
-      const updatedCells = [...cells]
-      updatedCells[peekTwo[0]].solved = true
-      updatedCells[peekTwo[1]].solved = true
+      peekTwo.length === 2 
+      && 
+      cells[peekTwo[0]].val === cells[peekTwo[1]].val
+    ) {
+      let updatedCells = [...cells]
+      console.log(updatedCells)
+      updatedCells = updatedCells.map(cell => {
+        console.log(cell)
+        if (
+          cell.key === peekTwo[0]
+          ||
+          cell.key === peekTwo[1]
+        ) {
+          console.log('Yooo')
+          cell.solved = true
+        }
+      })
       cells = updatedCells
       peekTwo = []
     }

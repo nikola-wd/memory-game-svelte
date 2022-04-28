@@ -23,7 +23,7 @@
   height: var(--cell-size);
   border-radius: 3px;
   transform-style: preserve-3d;
-  transition: all 1.45s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .cell:after,
@@ -50,7 +50,7 @@
 }
 .cell:after {
   backface-visibility: hidden;
-  background: #cecece;
+  background: #444;
   z-index: 1;
 }
 
